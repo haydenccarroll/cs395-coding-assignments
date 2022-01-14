@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
    int n;
    for (n=1; n < argc; n++)
    {
-      myArray[n-1] = atoi(argv[i]);
+      myArray[n-1] = atoi(argv[n]);
    }
    int lowestDistance = abs(myArray[1] - myArray[0]);
 
