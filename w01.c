@@ -19,10 +19,10 @@ int main(int argc, char *argv[])
       return EXIT_FAILURE;
    }
    int myArray[argc -1];
-   int i;
-   for (i=1; i < argc; i++)
+   int n;
+   for (n=1; n < argc; n++)
    {
-      myArray[i-1] = atoi(argv[i]);
+      myArray[n-1] = atoi(argv[i]);
    }
    int lowestDistance = abs(myArray[1] - myArray[0]);
 
