@@ -13,11 +13,6 @@
 // main function that takes in command line arguments such as ./w01.exe 1 2 65 3..
 int main(int argc, char *argv[])
 {
-   if (argc <= 2)
-   {
-      printf("%s 4 9 6 2\n", argv[0]);
-      return EXIT_FAILURE;
-   }
    int myArray[argc -1];
    int n;
    for (n=1; n < argc; n++)
@@ -32,9 +27,10 @@ int main(int argc, char *argv[])
       int z;
       for (z=i+1; z < argc-1; z++)
       {
-         if (i != z && abs(myArray[i] - myArray[z]) < lowestDistance)
+         int tempDistance = abs(myArray[i] - myArray[z]);
+         if (i != z && tempDistance < lowestDistance)
          {
-            lowestDistance = abs(myArray[i] - myArray[z]);
+            lowestDistance = tempDistance;
          }
       }
    }
