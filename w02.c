@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
    int myArray[argc -1];
    int lowestDistance = INTMAX;
 
+   myArray[argc-2] = atoi(argv[argc-1]);
    int i;
    for (i=0; i < argc-2; i++)
    {
