@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
    }
    int lowestDistance = abs(myArray[1] - myArray[0]);
 
-    int i;
+   int i;
    for (i=0; i < argc-1; i++)
    {
        int z;
