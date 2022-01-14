@@ -56,7 +56,8 @@ int partition(int array[], int low, int high) {
 
   // traverse each element of the array
   // compare them with the pivot
-  for (int j = low; j < high; j++) {
+  int j;
+  for (j = low; j < high; j++) {
     if (array[j] <= pivot) {
         
       // if element smaller than pivot is found
