@@ -10,21 +10,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define INTMAX 2147483647
 // main function that takes in command line arguments such as ./w01.exe 1 2 65 3..
 int main(int argc, char *argv[])
 {
    int myArray[argc -1];
-   int n;
-   for (n=1; n < argc; n++)
-   {
-      myArray[n-1] = atoi(argv[n]);
-   }
-   int lowestDistance = abs(myArray[1] - myArray[0]);
+   int lowestDistance = INTMAX;
 
    int i;
    for (i=0; i < argc-2; i++)
    {
+      myArray[i] = atoi(argv[i+1]);
       int z;
+
       for (z=i+1; z < argc-1; z++)
       {
          int tempDistance = abs(myArray[i] - myArray[z]);
