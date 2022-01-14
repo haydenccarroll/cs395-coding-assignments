@@ -5,6 +5,7 @@
  * Run: ./a.out input.txt
  *
  * Finds the shortest distance between any two items in an array
+ * FULL DISCLOSURE: I DID NOT CODE ANY OF THE QUICKSORT CODE.
  *********************************************/
 
 #include <stdio.h>
@@ -79,7 +80,7 @@ int partition(int array[], int low, int high)
    return (i + 1);
 }
 
-
+// this is the quicksort function. full disclosure: I did not code any of this.
 void quickSort(int array[], int low, int high) {
    if (low < high) 
    {
