@@ -1,8 +1,11 @@
-// name: w01.c
-// author: hayden carroll
-// date-last-modified: 1/14/22
-// description: implementation of shortest distance between two points in an array
-
+/*********************************************
+ * Id: carr5440
+ *
+ * Compile: gcc -Wall
+ * Run: ./a.out input.txt
+ *
+ * Finds the shortest distance between any two items in an array
+ *********************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
