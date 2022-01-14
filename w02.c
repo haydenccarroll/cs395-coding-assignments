@@ -15,19 +15,21 @@
 int main(int argc, char *argv[])
 {
    int myArray[argc -1];
-   int lowestDistance = INTMAX;
-
-   myArray[argc-2] = atoi(argv[argc-1]);
+   int n;
+   for (n=1; n < argc; n++)
+   {
+      myArray[n-1] = atoi(argv[n]);
+   }
+   int lowestDistance = abs(myArray[1] - myArray[0]);
    int i;
    for (i=0; i < argc-2; i++)
    {
-      myArray[i] = atoi(argv[i+1]);
       int z;
 
       for (z=i+1; z < argc-1; z++)
       {
          int tempDistance = abs(myArray[i] - myArray[z]);
-         if (i != z && tempDistance < lowestDistance)
+         if (tempDistance < lowestDistance)
          {
             lowestDistance = tempDistance;
          }
