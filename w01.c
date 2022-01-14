@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
    int i;
    for (i=0; i < argc-1; i++)
    {
-       int z;
+      int z;
       for (z=0; z < argc-1; z++)
       {
          if (i != z && abs(myArray[i] - myArray[z]) < lowestDistance)
