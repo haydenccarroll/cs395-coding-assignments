@@ -30,22 +30,20 @@ int main(int argc, char *argv[])
    // 9 10 11 12
 
    printMatrix(n, myArray);
-   int i;
-   for (i=0; i < n-2; i++)
+   int j;
+   for (j=0; j < n+1; j++) // LOOP THRU EVERY COLUMN
    {
-      int j;
-      for (j=i+1; j < n-1; j++)
+      int i;
+      for (i=j+1; i < n; i++) // LOOP THRU EVERY ROW
       {
-         float tempji = myArray[j][i];
-
+         float multiplier = myArray[i][j] / myArray[j][j];
          int k;
-         for (k=i; k < n; k++)
+         for (k=j; k < n+1; k++) // LOOP THRU EVERY COL LEFT IN THIS ROW
          {
-            myArray[j][k] = myArray[j][k] - (myArray[i][k] * tempji / myArray[i][i]);
+            myArray[i][k] = myArray[i][k] - (multiplier * myArray[j][k]);
          }
       }
       printMatrix(n, myArray);
-
    }
 
    return EXIT_SUCCESS;
