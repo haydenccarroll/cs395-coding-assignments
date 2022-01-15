@@ -60,4 +60,5 @@ void printMatrix(int numRow, int numCol, float myArray[numRow][numCol])
       }
       printf("\n");
    }
+   printf("\n");
 }
