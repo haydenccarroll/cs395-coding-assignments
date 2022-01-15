@@ -10,38 +10,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void printMatrix(int numRow, int numCol, float myArray[numRow][numCol]);
+void printMatrix(int n, float myArray[n][n+1]);
 
 // main function that gets a command line argument n and prints 2^n
 int main(int argc, char *argv[])
 {
-   int numRow = atoi(argv[1]);
-   int numCol = (argc-2) / numRow;
-   float myArray[numRow][numCol];
+   int n = atoi(argv[1]);
+   float myArray[n][n+1];
    
    // create 2D array
    int a;
    for (a=2; a < argc; a++)
    {
-      myArray[(a-2) / numCol][(a-2) % numCol] = atoi(argv[a]);
+      myArray[(a-2) / (n+1)][(a-2) % (n+1)] = atoi(argv[a]);
    }
 
-   printMatrix(numRow, numCol, myArray);
+   // 1  2  3  4
+   // 5  6  7  8
+   // 9 10 11 12
+
+   printMatrix(n, myArray);
    int i;
-   for (i=0; i < numRow-2; i++)
+   for (i=0; i < n-2; i++)
    {
       int j;
-      for (j=i+1; j < numRow-1; j++)
+      for (j=i+1; j < n-1; j++)
       {
          float tempji = myArray[j][i];
 
          int k;
-         for (k=i; k < numRow; k++)
+         for (k=i; k < n; k++)
          {
             myArray[j][k] = myArray[j][k] - (myArray[i][k] * tempji / myArray[i][i]);
          }
       }
-      printMatrix(numRow, numCol, myArray);
+      printMatrix(n, myArray);
 
    }
 
@@ -49,12 +52,12 @@ int main(int argc, char *argv[])
 }
 
 // prints a matrix
-void printMatrix(int numRow, int numCol, float myArray[numRow][numCol])
+void printMatrix(int n, float myArray[n][n+1])
 {
    int c, d;
-   for (c = 0; c < numRow; c++)
+   for (c = 0; c < n; c++)
    {
-      for (d = 0; d < numCol; d++)
+      for (d = 0; d < n+1; d++)
       {
          printf("%.2f ", myArray[c][d]);
       }
