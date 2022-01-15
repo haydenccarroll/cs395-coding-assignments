@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define INTMAX 2147483647
 void quickSort(int array[], int low, int high);
 // main function that takes in command line arguments such as ./w01.exe 1 2 65 3..
 int main(int argc, char *argv[])
