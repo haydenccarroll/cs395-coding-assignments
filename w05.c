@@ -31,7 +31,7 @@ void towerOfHanoiR(int n, char starting, char ending, char other)
    else
    {
       towerOfHanoiR(n-1, starting, other, ending);
-      printf("moved %c to %c\n", starting, ending);
+      printf("MOVE %c TO %c\n", starting, ending);
       towerOfHanoiR(n-1, other, ending, starting);
    }
 }
