@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 {
    int n = atoi(argv[1]);
    towerOfHanoiR(n, 'A', 'C', 'B');
+   return EXIT_SUCCESS;
 }
 
 // recurisve tower of hanoi function
