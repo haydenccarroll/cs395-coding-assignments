@@ -29,14 +29,20 @@ int main(int argc, char *argv[])
             matchFound = 0;
          }
       }
-      if (matchFound == 1 && isThereMatch == 0)
+      if (matchFound == 1)
       {
-         printf("Matches found at locations:");
+         if (isThereMatch == 0)
+         {
+            printf("Matches found at locations:");
+         }
          printf(" %d", i);
          isThereMatch = 1;
       }
    }
-   printf("There were no matches.");
+   if (!isThereMatch)
+   {
+      printf("There were no matches.");
+   }
    printf("\n");
    return EXIT_SUCCESS;
 }
