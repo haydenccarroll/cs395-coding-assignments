@@ -67,5 +67,5 @@ void InsertionSort(int myArray[], int arraySize)
    {
       printf("%d ", myArray[z]);
    }
-   printf("|\n");
+   printf("| \n");
 }
