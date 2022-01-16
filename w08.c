@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
    char* string = argv[2];
 
    int i;
-   printf("Matches found at locations: ");
+   printf("Matches found at locations:");
    for (i=0; string[i] != '\0'; i++)
    {
       int j;
@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
       }
       if (matchFound == 1)
       {
-         printf("%d ", i);
+         printf(" %d", i);
       }
    }
-   printf("\n\n");
+   printf("\n");
    return EXIT_SUCCESS;
 }
