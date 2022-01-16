@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
    char* string = argv[2];
 
    int i;
-   printf("match found at: ");
+   printf("Matches found at locations: ");
    for (i=0; string[i] != '\0'; i++)
    {
       int j;
