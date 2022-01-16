@@ -50,8 +50,8 @@ int HoarePartition(int arr[], int low, int high)
 
       if(i >= j)
       {
-            // if ptrs touch, that means you covered the whole list, 
-            // and everything to left is less than and everything to right is greater than
+         // if ptrs touch, that means you covered the whole list, 
+         // and everything to left is less than and everything to right is greater than
          return j;
       }
       int tempI = arr[i];
@@ -64,9 +64,7 @@ int HoarePartition(int arr[], int low, int high)
 void QuickSort(int arr[], int low, int high, int arraySize) 
 { 
    if (low < high) 
-   { 
-        /* pi is partitioning index, arr[p] is now 
-        at right place */
+   {
       int split = HoarePartition(arr, low, high); 
 
         // Separately sort elements before 
