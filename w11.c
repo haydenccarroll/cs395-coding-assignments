@@ -62,5 +62,5 @@ void InsertionSort(int myArray[], int arraySize)
       }
       myArray[j+1] = v;
    }
-   PrintArray(myArray, arraySize, -1);
+   PrintArray(myArray, arraySize, i);
 }
