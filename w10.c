@@ -99,7 +99,7 @@ void PrintArray(int myArray[], int low, int high, int arraySize)
       }
       else if (i == high)
       {
-         printf("%d] ", myArray[i]);
+         printf("%d]  ", myArray[i]);
       }
       else {
          printf("%d ", myArray[i]);
