@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
    char* string = argv[2];
 
    int i;
-   printf("Matches found at locations:");
+   int isThereMatch = 0;
    for (i=0; string[i] != '\0'; i++)
    {
       int j;
@@ -29,11 +29,14 @@ int main(int argc, char *argv[])
             matchFound = 0;
          }
       }
-      if (matchFound == 1)
+      if (matchFound == 1 && isThereMatch == 0)
       {
+         printf("Matches found at locations:");
          printf(" %d", i);
+         isThereMatch = 1;
       }
    }
+   printf("There were no matches.");
    printf("\n");
    return EXIT_SUCCESS;
 }
