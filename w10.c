@@ -67,8 +67,8 @@ void QuickSort(int arr[], int low, int high, int arraySize)
    {
       int split = HoarePartition(arr, low, high); 
 
-        // Separately sort elements before 
-        // partition and after partition 
+      // Separately sort elements before 
+      // partition and after partition 
       QuickSort(arr, low, split, arraySize);
       QuickSort(arr, split + 1, high, arraySize);
       PrintArray(arr, low, high, arraySize);
