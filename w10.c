@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void QuickSort(int arr[], int low, int high, int arraySize);
+void QuickSort(int myArray[], int low, int high, int arraySize);
 void PrintArray(int myArray[], int low, int high, int arraySize);
 int HoarePartition(int myArray[], int left, int right);
 
@@ -27,51 +27,64 @@ int main(int argc, char *argv[])
       myArray[i] = atoi(argv[i+1]);
    }
    QuickSort(myArray, 0, arraySize-1, arraySize);
+   PrintArray(myArray, 0, arraySize-1, arraySize);
+
    return EXIT_SUCCESS;
 }
 
 // divides array into 2 subarrays, with left side being less than the pivot,
 // and right side greater
-int HoarePartition(int arr[], int low, int high) 
+int HoarePartition(int myArray[], int low, int high) 
 { 
-   int pivot = arr[low];
+   int pivot = myArray[low];
 
-   int i = low-1, j = high+1;
+   int i = low, j = high+1;
    while(1)
    {
       do // find index where left ptr is greater than or equal to pivot
       {
          i++;
-      } while(arr[i] < pivot);
+      } while(myArray[i] < pivot);
       do // find index where right ptr is less than or equal to pivot
       {
          j--;
-      } while(arr[j] > pivot);
+      } while(myArray[j] > pivot);
 
+      int tempI = myArray[i];
+      myArray[i] = myArray[j];
+      myArray[j] = tempI;
       if(i >= j)
       {
          // if ptrs touch, that means you covered the whole list, 
          // and everything to left is less than and everything to right is greater than
-         return j;
+         break;
       }
-      int tempI = arr[i];
-      arr[i] = arr[j];
-      arr[j] = tempI;
    }
+
+   int tempI = myArray[i];
+   myArray[i] = myArray[j];
+   myArray[j] = tempI;
+
+   int tempJ = myArray[j];
+   myArray[j] = myArray[low];
+   myArray[low] = tempJ;
+
+   // printf("%d %d %d %d %d\n", i,j,low,high,pivot);
+   return j;
 }
 
 // implements quicksort
-void QuickSort(int arr[], int low, int high, int arraySize) 
+void QuickSort(int myArray[], int low, int high, int arraySize) 
 { 
    if (low < high) 
    {
-      int split = HoarePartition(arr, low, high); 
+      int split = HoarePartition(myArray, low, high); 
 
       // Separately sort elements before 
       // partition and after partition 
-      QuickSort(arr, low, split, arraySize);
-      QuickSort(arr, split + 1, high, arraySize);
-      PrintArray(arr, low, high, arraySize);
+      QuickSort(myArray, low, split -1, arraySize);
+      QuickSort(myArray, split +1, high, arraySize);
+      PrintArray(myArray, low, high, arraySize);
    } 
 } 
 // prints the array
