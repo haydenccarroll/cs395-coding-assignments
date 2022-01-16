@@ -62,5 +62,10 @@ void InsertionSort(int myArray[], int arraySize)
       }
       myArray[j+1] = v;
    }
-   PrintArray(myArray, arraySize, i);
+   int z;
+   for (z = 0; z < arraySize; z++)
+   {
+      printf("%d ", myArray[z]);
+   }
+   printf("|\n");
 }
