@@ -13,6 +13,64 @@
 #include <sys/time.h>
 #include <math.h>
 
+void SelectionSort(int myArray[], int n);
+int HoarePartition(int myArray[], int low, int high);
+void QuickSort(int myArray[], int low, int high, int arraySize);
+void InsertionSort(int myArray[], int arraySize);
+
+// main function
+int main(int argc, char *argv[])
+{
+   srand(0);
+
+   int powerSize = atoi(argv[1]);
+   int y;
+   int arraySize = 1;
+   for (y=0; y < powerSize; y++)
+   {
+      arraySize *= 10;
+   }
+   int array1[arraySize];
+   int array2[arraySize];
+   int array3[arraySize];
+
+   int i;
+   // create 1 array
+   for (i=0; i < arraySize; i++)
+   {
+      array1[i] = rand() % 10;
+   }
+
+   int z;
+   // copy first array to 2 other arrays
+   for (z=0; z < arraySize; z++)
+   {
+      array2[z] = array1[z];
+      array3[z] = array1[z];
+   }
+
+   struct timeval start, stop;
+   gettimeofday(&start, NULL);
+   SelectionSort(array1, arraySize);
+   gettimeofday(&stop, NULL);
+   double SelectionTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
+
+
+   gettimeofday(&start, NULL);
+   InsertionSort(array2, arraySize);
+   gettimeofday(&stop, NULL);
+   double InsertionTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
+
+   gettimeofday(&start, NULL);
+   QuickSort(array3, 0, arraySize-1, arraySize);
+   gettimeofday(&stop, NULL);
+   double QuickTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
+
+   printf("Selection Sort Time: %f\nInsertion Sort Time: %f\nQuick Sort Time: %f\nNumber of Elements: %d\n", SelectionTime, InsertionTime, QuickTime, arraySize);
+
+   return EXIT_SUCCESS;
+}
+
 
 // does selection sort and sorts the array
 void SelectionSort(int myArray[], int n)
@@ -111,60 +169,6 @@ void InsertionSort(int myArray[], int arraySize)
       myArray[j+1] = v;
    }
 }
-
-// main function
-int main(int argc, char *argv[])
-{
-   srand(0);
-
-   int powerSize = atoi(argv[1]);
-   int y;
-   int arraySize = 1;
-   for (y=0; y < powerSize; y++)
-   {
-      arraySize *= 10;
-   }
-   int array1[arraySize];
-   int array2[arraySize];
-   int array3[arraySize];
-
-   int i;
-   // create 1 array
-   for (i=0; i < arraySize; i++)
-   {
-      array1[i] = rand() % 10;
-   }
-
-   int z;
-   // copy first array to 2 other arrays
-   for (z=0; z < arraySize; z++)
-   {
-      array2[z] = array1[z];
-      array3[z] = array1[z];
-   }
-
-   struct timeval start, stop;
-   gettimeofday(&start, NULL);
-   SelectionSort(array1, arraySize);
-   gettimeofday(&stop, NULL);
-   double SelectionTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
-
-
-   gettimeofday(&start, NULL);
-   InsertionSort(array2, arraySize);
-   gettimeofday(&stop, NULL);
-   double InsertionTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
-
-   gettimeofday(&start, NULL);
-   QuickSort(array3, 0, arraySize-1, arraySize);
-   gettimeofday(&stop, NULL);
-   double QuickTime = (double)(stop.tv_sec - start.tv_sec) * 1000 + (double)(stop.tv_usec - start.tv_usec) / 1000;
-
-   printf("Selection Sort Time: %f\nInsertion Sort Time: %f\nQuick Sort Time: %f\nNumber of Elements: %d\n", SelectionTime, InsertionTime, QuickTime, arraySize);
-
-   return EXIT_SUCCESS;
-}
-
 //+-----------------------+-----------------+----------------+------------+
 //|    Number of Elements |  Selection Sort | Insertion sort |  Quicksort |
 //+-----------------------+-----------------+----------------+------------+
