@@ -110,7 +110,6 @@ void InsertionSort(int myArray[], int arraySize)
       }
       myArray[j+1] = v;
    }
-   int z;
 }
 
 // main function
