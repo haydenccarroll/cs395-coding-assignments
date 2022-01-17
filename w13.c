@@ -38,5 +38,5 @@ int main(int argc, char *argv[])
    printf("%6d %6d %6d\n", num1, num2, num2);
    printf("%20s\n", "------");
    printf("%20d\n", runningTotal+num2);
-
+   return EXIT_SUCCESS;
 }
