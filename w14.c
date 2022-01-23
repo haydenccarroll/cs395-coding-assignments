@@ -85,8 +85,8 @@ int HorspoolMatching(char needle[], char haystack[], int m, int n)
       if (k == m)
       {
          printf("%*s%s---found\n", i-m+1,"", needle);
-         matchNum++;
          matches[matchNum] = i-m+1;
+         matchNum++;
       }
       else
       {
