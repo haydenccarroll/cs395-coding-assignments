@@ -58,7 +58,7 @@ int* ShiftTable(char needle[], int m)
    int j;
    for (j=0; j < m-2; j++)
    {
-      Table[needle[j]] = m-1-j;
+      Table[(int) needle[j]] = m-1-j;
    }
    printShiftTable(Table);
    return Table;
@@ -93,7 +93,7 @@ int HorspoolMatching(char needle[], char haystack[], int m, int n)
       {
          printf("%*s%s\n", i-m+1, "", needle);
       }
-      i += Table[haystack[i]];
+      i += Table[(int) haystack[i]];
     }
    printf("Matches found at locations:");
    for(i = 0; i < matchNum; i++)
