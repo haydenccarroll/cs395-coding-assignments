@@ -87,7 +87,6 @@ int HorspoolMatching(char needle[], char haystack[], int m, int n)
          printf("%*s%s---found\n", i-m+1,"", needle);
          matchNum++;
          matches[matchNum] = i-m+1;
-        //  return i-m+1; // Except for your code, do not return. Start looking for the next occurance from here.
       }
       else
       {
