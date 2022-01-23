@@ -56,7 +56,7 @@ int* ShiftTable(char needle[], int m)
       Table[i] = m;
    }
    int j;
-   for (j=0; j < m-2; j++)
+   for (j=0; j < m-1; j++)
    {
       Table[(int) needle[j]] = m-1-j;
    }
