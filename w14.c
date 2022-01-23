@@ -93,7 +93,7 @@ int HorspoolMatching(char needle[], char haystack[], int m, int n)
          printf("%*s%s\n", i-m+1, "", needle);
       }
       i += Table[(int) haystack[i]];
-    }
+   }
    printf("Matches found at locations:");
    for(i = 0; i < matchNum; i++)
    {
