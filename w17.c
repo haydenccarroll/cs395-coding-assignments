@@ -11,8 +11,6 @@
 #include <stdlib.h>
 #include "math.h"
 
-int**  RobotCoinCollection(char** board, int** table);
-
 
 int main(int argc, char *argv[])
 {
@@ -25,10 +23,11 @@ int main(int argc, char *argv[])
    int a;
    for (a=0; a < numRows; a++)
    {
-      board[a] = malloc(sizeof(char) * numCols);
+      board[a] = malloc(sizeof(int) * numCols);
       table[a] = malloc(sizeof(int) * numCols);
    }
 
+   // initialize input board
    printf("Board Inputed:\n");
    int b;
    for (b=0; b < numRows; b++)
@@ -39,7 +38,8 @@ int main(int argc, char *argv[])
          char* val = argv[b*numCols + j + 3];
          if (val[0] == 'X')
          {
-            board[b][j] = -10000;
+            board[b][j] = -1000;
+            table[b][j] = 0;
             printf("X\t");
          }
          else
@@ -54,29 +54,14 @@ int main(int argc, char *argv[])
    
    printf("\nCoin Collecting Table:\n");
 
+   // initialize top row
    table[0][0] = board[0][0];
    printf("%d\t", table[0][0]);
    int j;
    for (j=1; j < numCols; j++)
    {
-      if (table[0][j-1] < 0 || board[0][j] < 0)
-      {
-         table[0][j] = -10000;
-         printf("0\t");
-         continue;
-      }
-      else
-      {
-         table[0][j] = table[0][j-1] + board[0][j];
-         if (table[0][j] < 0)
-         {
-            printf("0\t");
-         }
-         else
-         {
-            printf("%d\t", table[0][j]);
-         }
-      }
+      table[0][j] = table[0][j-1] + board[0][j];
+      printf("%d\t", table[0][j]);
 
    }
    printf("\n");
@@ -84,35 +69,30 @@ int main(int argc, char *argv[])
    for (i=1; i < numRows; i++)
    {
       table[i][0] = table[i-1][0] + board[i][0];
-      if (table[i][0] < 0)
-      {
-         printf("0\t");
-      }
-      else
-      {
-         printf("%d\t", board[i][0]);
-      }
       int j;
       for (j=1; j < numCols; j++)
       {
-         int max;
+         int max = 0;
+         if (board[i][j] > 1)
+         {
+            board[i][j] = 1;
+         }
          if (table[i-1][j] > table[i][j-1])
          {
-            max = table[i-1][j]  + board[i][j];
+            max = table[i-1][j] + board[i][j];
          }
          else
          {
             max = table[i][j-1] + board[i][j];
          }
+
          table[i][j] = max;
          if (table[i][j] < 0)
          {
             printf("0\t");
+            continue;
          }
-         else
-         {
-            printf("%d\t", table[i][j]);
-         }
+         printf("%d\t", table[i][j]);
       }
       printf("\n");
    }
