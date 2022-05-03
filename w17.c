@@ -22,21 +22,23 @@ int main(int argc, char *argv[])
     // create the board and the coin collecting table
     int** board = malloc(sizeof(int*) * numRows);
     int** table = malloc(sizeof(int*) * numRows);
-    for (int i=0; i < numRows; i++)
+    int a;
+    for (a=0; a < numRows; a++)
     {
-        board[i] = malloc(sizeof(char) * numCols);
-        table[i] = malloc(sizeof(int) * numCols);
+        board[a] = malloc(sizeof(char) * numCols);
+        table[a] = malloc(sizeof(int) * numCols);
     }
 
     printf("Board Inputed:\n");
-    for (int i=0; i < numRows; i++)
+    int b;
+    for (b=0; b < numRows; b++)
     {
         for (int j=0; j < numCols; j++)
         {
-            char* val = argv[i*numCols + j + 3];
+            char* val = argv[b*numCols + j + 3];
             if (val[0] == 'X')
             {
-                board[i][j] = -10000;
+                board[b][j] = -10000;
                 printf("X\t");
             }
             else
@@ -53,8 +55,8 @@ int main(int argc, char *argv[])
 
     table[0][0] = board[0][0];
     printf("%d\t", table[0][0]);
-
-    for (int j=1; j < numCols; j++)
+    int j;
+    for (j=1; j < numCols; j++)
     {
         if (table[0][j-1] < 0 || board[0][j] < 0)
         {
@@ -77,7 +79,8 @@ int main(int argc, char *argv[])
 
     }
     printf("\n");
-    for (int i=1; i < numRows; i++)
+    int i;
+    for (i=1; i < numRows; i++)
     {
         table[i][0] = table[i-1][0] + board[i][0];
         if (table[i][0] < 0)
@@ -88,8 +91,8 @@ int main(int argc, char *argv[])
         {
             printf("%d\t", board[i][0]);
         }
-
-        for (int j=1; j < numCols; j++)
+        int j;
+        for (j=1; j < numCols; j++)
         {
             int max;
             if (table[i-1][j] > table[i][j-1])
