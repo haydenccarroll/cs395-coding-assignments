@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
     int b;
     for (b=0; b < numRows; b++)
     {
-        for (int j=0; j < numCols; j++)
+        int j;
+        for (j=0; j < numCols; j++)
         {
             char* val = argv[b*numCols + j + 3];
             if (val[0] == 'X')
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
             }
             else
             {
-                board[i][j] = atoi(val);
+                board[b][j] = atoi(val);
                 printf("%s\t", val);
             }
 
