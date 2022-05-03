@@ -25,8 +25,8 @@ int main(int argc, char *argv[])
    int a;
    for (a=0; a < numRows; a++)
    {
-   board[a] = malloc(sizeof(char) * numCols);
-   table[a] = malloc(sizeof(int) * numCols);
+      board[a] = malloc(sizeof(char) * numCols);
+      table[a] = malloc(sizeof(int) * numCols);
    }
 
    printf("Board Inputed:\n");
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
          int max;
          if (table[i-1][j] > table[i][j-1])
          {
-             max = table[i-1][j]  + board[i][j];
+            max = table[i-1][j]  + board[i][j];
          }
          else
          {
