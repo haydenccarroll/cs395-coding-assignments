@@ -74,6 +74,14 @@ int main(int argc, char *argv[])
    for (i=1; i < numRows; i++)
    {
       table[i][0] = table[i-1][0] + board[i][0];
+      if (table[i][0] < 0)
+      {
+         printf("0\t");
+      }
+      else
+      {
+         printf("%d\t", table[i][0]);
+      }
       int j;
       for (j=1; j < numCols; j++)
       {
