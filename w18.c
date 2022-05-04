@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
       j += count;
    }
 
-    // make it a adjacency matrix
+   // make it a adjacency matrix
    for (i = 0; i < numNodes; i++)
    {
       for (j = 0; j < i + 1; j++)
