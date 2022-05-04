@@ -1,54 +1,132 @@
-/*********************************************
- * Id: carr5440
- *
- * Compile: gcc -Wall
- * Run: ./a.out input.txt
- *
- * Modified Robot Coin Collecting
- *********************************************/
 
-#include <stdio.h>
 #include <stdlib.h>
-#include "math.h"
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
 
-bool searchForFullSubgraph(int** graph, int numNodes, int levelToSearch);
+int findConnectedSubgraph(int size, int matrix[][size], int row, int clique[], int total);
+int findMaxConnectedSubgraph(int size, int matrix[][size]);
 
-
+// Accepts command line arguments as elements of an array.
 int main(int argc, char *argv[])
 {
    int numNodes = atoi(argv[1]);
-   argv += 2;
-   int numToReadIn = numNodes-1;
-   int i=0;
-   int currSpotInArgv = 0;
-   int** adjacencyMatrix = malloc(sizeof(int*) * numNodes);
-   for (i=0; i < numNodes-1; i++)
+   int matrix[numNodes][numNodes];
+   int i, j, k, count;
+
+   // Read in matrix
+   j = 0;
+   for (k = 0; k < numNodes - 1; k++)
    {
-      adjacencyMatrix[i] = malloc(sizeof(int) * numNodes);
-      adjacencyMatrix[i][i] = 1;
-      int j;
-      for (j=0; j < numNodes-1-i; j++)
+      count = 0;
+      for (i = k + 1; i < numNodes; i++)
       {
-         adjacencyMatrix[i][j] = atoi(argv[currSpotInArgv]);
-         currSpotInArgv++;
+         matrix[k][i] = atoi(argv[2 + j + count]);
+         count++;
+      }
+      j += count;
+   }
+
+    // make it a adjacency matrix
+   for (i = 0; i < numNodes; i++)
+   {
+      for (j = 0; j < i + 1; j++)
+      {
+         matrix[i][j] = 0;
+      }
+   }
+   for (i = 0; i < numNodes; i++)
+   {
+      for (j = 0; j < numNodes; j++)
+      {
+         matrix[j][i] = matrix[i][j];
       }
    }
 
-   for (i=0; i < numNodes-1; i++)
+   for (i = 0; i < numNodes; i++)
    {
-      int j;
-      for (j=0; j < numNodes-i-1; j++)
+      for (j = 0; j < numNodes; j++)
       {
-         printf("%d ", adjacencyMatrix[i][j]);
+         printf("%d ", matrix[i][j]);
       }
       printf("\n");
    }
 
-   return EXIT_SUCCESS;
+   int result = findMaxConnectedSubgraph(numNodes, matrix);
+
+   for (i = numNodes; i > 0; i--)
+   {
+      if (result < i)
+      {
+         printf("No clique found of size %d\n", i);
+      }
+      if (result == i)
+      {
+         printf("Clique found of size %d\n", i);
+      }
+   }
+
+   return 0;
 }
 
-bool searchForFullSubgraph(int** graph, int numNodes, int levelToSearch)
+// Finds the clique from an adjacency matrix.
+int findConnectedSubgraph(int numNodes, int matrix[][numNodes], int row, int clique[], int total)
 {
    int i;
-   for (i = 0; )
+   int count = 0;
+
+   for (i = 0; i < numNodes; i++)
+   {
+      if (clique[i] == 1 && matrix[row][i] == 1)
+      {
+         count++;
+      }
+   }
+
+   if (count == total)
+   {
+      return 1;
+   }
+   return 0;
+}
+
+// Calculates and returns the max clique.
+int findMaxConnectedSubgraph(int size, int matrix[][size])
+{
+   int i, j, k, l, count, maxconnSubgraph;
+   int connSubgraph[size];
+
+   maxconnSubgraph = 2;
+   count = 1;
+   for (l = 0; l < size; l++)
+   {
+      for (j = 0; j < size; j++)
+      {
+         connSubgraph[j] = 0;
+      }
+
+      connSubgraph[l] = 1;
+      for (i = 0; i < size; i++)
+      {
+         k = 0;
+
+         if (matrix[l][i] == 1)
+         {
+            k = findConnectedSubgraph(size, matrix, i, connSubgraph, count);
+         }
+
+         if (k == 1)
+         {
+            count++;
+            connSubgraph[i] = 1;
+         }
+      }
+
+      if (count > maxconnSubgraph)
+      {
+         maxconnSubgraph = count;
+      }
+      count = 1;
+   }
+   return maxconnSubgraph;
 }
