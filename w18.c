@@ -1,3 +1,11 @@
+/*********************************************
+ * Id: carr5440
+ *
+ * Compile: gcc -Wall
+ * Run: ./a.out input.txt
+ *
+ * W18 cliques
+ *********************************************/
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -65,7 +73,6 @@ int main(int argc, char *argv[])
          printf("Clique found of size %d\n", i);
       }
    }
-
    return 0;
 }
 
@@ -74,7 +81,6 @@ int findConnectedSubgraph(int numNodes, int matrix[][numNodes], int row, int cli
 {
    int i;
    int count = 0;
-
    for (i = 0; i < numNodes; i++)
    {
       if (clique[i] == 1 && matrix[row][i] == 1)
@@ -83,7 +89,7 @@ int findConnectedSubgraph(int numNodes, int matrix[][numNodes], int row, int cli
       }
    }
 
-   if (count == total)
+   if (total == count)
    {
       return 1;
    }
@@ -93,24 +99,24 @@ int findConnectedSubgraph(int numNodes, int matrix[][numNodes], int row, int cli
 // Calculates and returns the max clique.
 int findMaxConnectedSubgraph(int size, int matrix[][size])
 {
-   int i, j, k, l, count, maxconnSubgraph;
+   int i, j, k, a, count, maxconnSubgraph;
    int connSubgraph[size];
 
    maxconnSubgraph = 2;
    count = 1;
-   for (l = 0; l < size; l++)
+   for (a = 0; a < size; a++)
    {
       for (j = 0; j < size; j++)
       {
          connSubgraph[j] = 0;
       }
 
-      connSubgraph[l] = 1;
+      connSubgraph[a] = 1;
       for (i = 0; i < size; i++)
       {
          k = 0;
 
-         if (matrix[l][i] == 1)
+         if (matrix[a][i] == 1)
          {
             k = findConnectedSubgraph(size, matrix, i, connSubgraph, count);
          }
