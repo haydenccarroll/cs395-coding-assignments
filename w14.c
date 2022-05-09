@@ -12,7 +12,7 @@
 
 int* ShiftTable(char needle[], int m);
 int HorspoolMatching(char needle[], char haystack[], int m, int n);
-void printShiftTable(int table[]);
+void printBadShiftTable(int table[]);
 
 // main function
 int main(int argc, char *argv[])
@@ -60,7 +60,7 @@ int* ShiftTable(char needle[], int m)
    {
       Table[(int) needle[j]] = m-1-j;
    }
-   printShiftTable(Table);
+   printBadShiftTable(Table);
    return Table;
 }
 
@@ -108,7 +108,7 @@ int HorspoolMatching(char needle[], char haystack[], int m, int n)
 #define TABLE_ROW_LENGTH 16
 #define MIN_WRITEABLE 32
 //Print out the shift table starting at the first writable character (space)
-void printShiftTable(int table[])
+void printBadShiftTable(int table[])
 {
    int i, start;
    for(start = MIN_WRITEABLE; start < MAX_ALPHABET; start+=TABLE_ROW_LENGTH)
