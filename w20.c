@@ -19,19 +19,16 @@ void printM(int M[][2], int start, int end);
 void printQueue(int Queue[], int start, int end);
 void printGraph(int G[MAX_BOARD][MAX_BOARD], int Vverticies);
 
-void enqueue(int Q[MAX_BOARD], int val);
-void dequeue(int Q[MAX_BOARD]);
-int top(int Q[MAX_BOARD]);
-int isEmpty(int Q[MAX_BOARD]);
+void enqueue(int Q[MAX_BOARD], int val, int* qStart, int* qEnd);
+void dequeue(int Q[MAX_BOARD], int* qStart, int* qEnd);
+int top(int Q[MAX_BOARD], int* qStart, int* qEnd);
+int isEmpty(int Q[MAX_BOARD], int* qStart, int* qEnd);
 
 int isUFree(int M[MAX_BOARD][2], int u);
 int isVFree(int M[MAX_BOARD][2], int v);
 int isElemOfM(int M[MAX_BOARD][2], int w, int u);
-int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices);
+int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices, int* qStart, int* qEnd);
 int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices);
-
-int qStart = 0;
-int qEnd = 0;
 
 // main function
 int main(int argc, char *argv[])
@@ -81,6 +78,10 @@ int main(int argc, char *argv[])
 
 int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
 {
+   // its unfortunate that global variables are not allowed.
+   int qStart = 0;
+   int qEnd = 0;
+
    int colorArr[MAX_BOARD];
    int i;
    for (i=0; i < MAX_BOARD; ++i)
@@ -95,13 +96,13 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
    // numbers and enqueue source vertex
    // for BFS traversal
    int Q[MAX_BOARD];
-   enqueue(Q, 0);
+   enqueue(Q, 0, &qStart, &qEnd);
 
-   while (!isEmpty(Q))
+   while (!isEmpty(Q, &qStart, &qEnd))
    {
       // Dequeue a vertex from queue ( Refer http://goo.gl/35oz8 )
-      int u = top(Q);
-      dequeue(Q);
+      int u = top(Q, &qStart, &qEnd);
+      dequeue(Q, &qStart, &qEnd);
       printf("HERE IS U: %d\n", u);
 
  
@@ -122,7 +123,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
          {
             // Assign alternate color to this adjacent v of u
             colorArr[v] = 1 - colorArr[u];
-            enqueue(Q, v);
+            enqueue(Q, v, &qStart, &qEnd);
          }
  
          // An edge from u to v exists and destination
@@ -232,16 +233,16 @@ int isVFree(int M[MAX_BOARD][2], int v)
    return 1;
 }
 
-int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices)
+int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices, int* qStart, int* qEnd)
 {
    int i;
-   qStart = 0;
-   qEnd = 0;
+   *qStart = 0;
+   *qEnd = 0;
    for (i=0; i < VVertices; i++)
    {
       if (isVFree(M, i))
       {
-         enqueue(Q, i);
+         enqueue(Q, i, qStart, qEnd);
       }
 
    }
@@ -265,24 +266,24 @@ int isElemOfM(int M[MAX_BOARD][2], int w, int u)
    return 0;
 }
 
-void enqueue(int Q[MAX_BOARD], int val)
+void enqueue(int Q[MAX_BOARD], int val, int* qStart, int* qEnd)
 {
-   Q[qEnd] = val;
-   qEnd++;
+   Q[*qEnd] = val;
+   (*qEnd)++;
 
 
 }
-void dequeue(int Q[MAX_BOARD])
+void dequeue(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
-   qStart++;
+   (*qStart)++;
 }
-int top(int Q[MAX_BOARD])
+int top(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
-   return Q[qStart];
+   return Q[*qStart];
 }
-int isEmpty(int Q[MAX_BOARD])
+int isEmpty(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
-   if (qStart >= qEnd)
+   if (*qStart >= *qEnd)
    {
       return 1;
    }
