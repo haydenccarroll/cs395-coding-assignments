@@ -34,7 +34,8 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices);
 int main(int argc, char *argv[])
 {
    int numNodes = atoi(argv[1]);
-   int matrix[numNodes][numNodes];
+   int matrix[MAX_BOARD][MAX_BOARD];
+   
    int i, j, k, count;
 
    // Read in matrix
@@ -80,7 +81,7 @@ int main(int argc, char *argv[])
 }
 
 // returns 1 if bipartite, 0 else
-int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
+int isBipartite(int G[][MAX_BOARD], int VVertices)
 {
    // its unfortunate that global variables are not allowed.
    int qStart = 0;
@@ -90,7 +91,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
    int i;
    for (i=0; i < MAX_BOARD; ++i)
    {
-      colorArr[i] = 1;
+      colorArr[i] = -1;
    }
 
    // Assign first color to source
@@ -111,7 +112,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
       // Return false if there is a self-loop
       if (G[u][u] == 1)
       {
-         printf("Graph is not Bipartite\n");
+         printf("Graph is NOT Bipartite\n");
          return 0;
       }
 
@@ -132,7 +133,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
          // v is colored with same color as u
          else if (G[u][v] && colorArr[v] == colorArr[u])
          {
-            printf("Graph is not Bipartite\n");
+            printf("Graph is NOT Bipartite\n");
             return 0;
          }
       }
