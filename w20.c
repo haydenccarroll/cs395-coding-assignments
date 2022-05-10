@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 
 }
 
+// returns 1 if bipartite, 0 else
 int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
 {
    // its unfortunate that global variables are not allowed.
