@@ -1,9 +1,13 @@
 
 
-
-//Finds a maximum matching in a bipartite graph by a BFS-like traversal
-//Input: A bipartite graph G = Adjacenty Matrix
-//Output: A maximum-cardinality matching M (array of (V,U) edges in the input graph
+/*********************************************
+ * Id: carr5440
+ *
+ * Compile: gcc -Wall
+ * Run: ./a.out input.txt
+ *
+ * W20 is bipartite
+ *********************************************/
 
 #include <stdlib.h>
 #include <stdio.h>
