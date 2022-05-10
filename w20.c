@@ -192,8 +192,7 @@ void printM(int M[][2], int start, int end) {
    printf("\n");
 }
 
-
-
+// 1 if u free else 0
 int isUFree(int M[MAX_BOARD][2], int u)
 {
    int i;
@@ -213,6 +212,7 @@ int isUFree(int M[MAX_BOARD][2], int u)
    return 1;
 }
 
+// 1 if v free else 0
 int isVFree(int M[MAX_BOARD][2], int v)
 {
    int i;
@@ -232,6 +232,7 @@ int isVFree(int M[MAX_BOARD][2], int v)
    return 1;
 }
 
+// 1 on reinitlalize
 int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices, int* qStart, int* qEnd)
 {
    int i;
@@ -248,6 +249,7 @@ int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices, int* qSt
    return 1;
 }
 
+// 1 on is elem of m else 0
 int isElemOfM(int M[MAX_BOARD][2], int w, int u)
 {
    int i;
@@ -265,6 +267,7 @@ int isElemOfM(int M[MAX_BOARD][2], int w, int u)
    return 0;
 }
 
+// enqueue
 void enqueue(int Q[MAX_BOARD], int val, int* qStart, int* qEnd)
 {
    Q[*qEnd] = val;
@@ -272,14 +275,20 @@ void enqueue(int Q[MAX_BOARD], int val, int* qStart, int* qEnd)
 
 
 }
+
+// dequeue
 void dequeue(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
    (*qStart)++;
 }
+
+// top
 int top(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
    return Q[*qStart];
 }
+
+// 1 if empty else 0
 int isEmpty(int Q[MAX_BOARD], int* qStart, int* qEnd)
 {
    if (*qStart >= *qEnd)
