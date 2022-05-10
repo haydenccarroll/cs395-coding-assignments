@@ -24,6 +24,7 @@ int isEmpty(int Q[MAX_BOARD]);
 
 int isUFree(int M[MAX_BOARD][2], int u);
 int isVFree(int M[MAX_BOARD][2], int v);
+int getULoc(int M[MAX_BOARD][2], int u);
 int isElemOfM(int M[MAX_BOARD][2], int w, int u);
 int reInitializeQ(int Q[MAX_BOARD], int M[MAX_BOARD][2], int VVertices);
 int** MaximumBipartiteMatching(int G[MAX_BOARD][MAX_BOARD], int VVertices, int UVertices);
@@ -132,17 +133,28 @@ int** MaximumBipartiteMatching(int G[MAX_BOARD][MAX_BOARD], int VVertices, int U
                {
                   // label u with w
                   enqueue(Q, u);
+                  break;
                }
                else if (!isElemOfM(M, w, u)) // AND U IS UNLABELED
                {
                   // label u with w
                   enqueue(Q, u);
+                  break;
                }
 
             }
             i++;
          }
       }
+      
+      else // is a member of U (and matched)
+      {
+         int loc = getULoc(M, w);
+         int v = M[loc][0];
+         // enqueue(Q, v);
+
+      }
+      
       printM(M, startM, endM);
    }
    // initialize set M of edges with some valid matching (e.g., the empty set)
@@ -166,7 +178,7 @@ int** MaximumBipartiteMatching(int G[MAX_BOARD][MAX_BOARD], int VVertices, int U
    //             if (w, u) is not an element of M and u is unlabeled
    //                label u with w
    //                Enqueue(Q, u)
-   //    else //w is an element of U (and matched)
+   //     else //w is an element of U (and matched)
    //       label the mate v of w with w
    //       Enqueue(Q, v)
    //    printM(M)
@@ -224,7 +236,24 @@ void printM(int M[][2], int start, int end) {
    printf("\n");
 }
 
+int getULoc(int M[MAX_BOARD][2], int u)
+{
+   int i;
+   for (i=0; i < MAX_BOARD; i++)
+   {
+      if (M[i][1] == BCEMPTY)
+      {
+         return -1;
+      }
 
+      if (M[i][1] == u)
+      {
+         return i;
+      }
+   }
+
+   return -1;
+}
 
 int isUFree(int M[MAX_BOARD][2], int u)
 {
