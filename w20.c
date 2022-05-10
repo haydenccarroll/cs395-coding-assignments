@@ -33,45 +33,49 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices);
 // main function
 int main(int argc, char *argv[])
 {
-   // initialize V vertices size and U Vertices size
-   int numVVertices = atoi(argv[1]);
-   int numUVertices = atoi(argv[2]);
+   int numNodes = atoi(argv[1]);
+   int matrix[numNodes][numNodes];
+   int i, j, k, count;
 
-   // initialize Graph
-   int G[MAX_BOARD][MAX_BOARD];
-   int i;
-   for (i=0; i < MAX_BOARD; i++)
+   // Read in matrix
+   j = 0;
+   for (k = 0; k < numNodes - 1; k++)
    {
-      int j;
-      for (j=0; j < MAX_BOARD; j++)
+      count = 0;
+      for (i = k + 1; i < numNodes; i++)
       {
-         G[i][j] = BCEMPTY;
+         matrix[k][i] = atoi(argv[2 + j + count]);
+         count++;
+      }
+      j += count;
+   }
+
+   // make it a adjacency matrix
+   for (i = 0; i < numNodes; i++)
+   {
+      for (j = 0; j < i + 1; j++)
+      {
+         matrix[i][j] = 0;
+      }
+   }
+   for (i = 0; i < numNodes; i++)
+   {
+      for (j = 0; j < numNodes; j++)
+      {
+         matrix[j][i] = matrix[i][j];
       }
    }
 
-   // Read in graph
-   argv += 2;
-   argc -= 2;
-   for (i=0; i < numVVertices; i++)
+   for (i = 0; i < numNodes; i++)
    {
-      int j;
-      for (j=0; j < numUVertices; j++)
+      for (j = 0; j < numNodes; j++)
       {
-         argv++;
-         argc--;
-         if (argc == 0 || (*argv)[0] == 'X')
-         {
-            break;
-         }
-
-         G[i][j] = atoi(*argv);
+         printf("%d ", matrix[i][j]);
       }
+      printf("\n");
    }
 
-   printGraph(G, numVVertices);
-
-   isBipartite(G, numVVertices);
-   return EXIT_SUCCESS;
+   isBipartite(matrix, numNodes);
 
 }
 
@@ -103,12 +107,11 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
       // Dequeue a vertex from queue ( Refer http://goo.gl/35oz8 )
       int u = top(Q, &qStart, &qEnd);
       dequeue(Q, &qStart, &qEnd);
-      printf("HERE IS U: %d\n", u);
 
       // Return false if there is a self-loop
       if (G[u][u] == 1)
       {
-         printf("THERE IS A SELF LOOP\n");
+         printf("Graph is not Bipartite\n");
          return 0;
       }
 
@@ -129,13 +132,13 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
          // v is colored with same color as u
          else if (G[u][v] && colorArr[v] == colorArr[u])
          {
-            printf("ITS COLORED SAME\n");
+            printf("Graph is not Bipartite\n");
             return 0;
          }
       }
    }
  
-   printf("YAY\n");
+   printf("Graph is Bipartite\n");
    // If we reach here, then all adjacent 
    // vertices can be colored with alternate color
    return 1;
