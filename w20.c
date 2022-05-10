@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
    }
 
    isBipartite(matrix, numNodes);
-
+   return 0;
 }
 
 // returns 1 if bipartite, 0 else
