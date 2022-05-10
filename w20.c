@@ -139,7 +139,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
    // vertices can be colored with alternate color
    return 1;
 }
-   
+
 
 // Note: These are my print functions. Your may vary if you have different data structures.
 // Print the adjacentcy matrix.
