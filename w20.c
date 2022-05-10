@@ -80,7 +80,8 @@ int main(int argc, char *argv[])
 int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
 {
    int colorArr[MAX_BOARD];
-   for (int i = 0; i < MAX_BOARD; ++i)
+   int i;
+   for (i=0; i < MAX_BOARD; ++i)
    {
       colorArr[i] = 1;
    }
@@ -110,7 +111,8 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
       }
                     
       // Find all non-colored adjacent vertices
-      for (int v = 0; v < MAX_BOARD; ++v)
+      int v;
+      for (v=0; v < MAX_BOARD; ++v)
       {
          // An edge from u to v exists and
          // destination v is not colored
