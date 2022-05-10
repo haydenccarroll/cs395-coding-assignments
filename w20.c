@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
    isBipartite(G, numVVertices);
    return EXIT_SUCCESS;
 
-   
 }
 
 int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
@@ -88,10 +87,10 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
    {
       colorArr[i] = 1;
    }
- 
+
    // Assign first color to source
    colorArr[0] = 0;
- 
+
    // Create a queue (FIFO) of vertex
    // numbers and enqueue source vertex
    // for BFS traversal
@@ -105,14 +104,13 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
       dequeue(Q, &qStart, &qEnd);
       printf("HERE IS U: %d\n", u);
 
- 
       // Return false if there is a self-loop
       if (G[u][u] == 1)
       {
          printf("THERE IS A SELF LOOP\n");
          return 0;
       }
-                    
+
       // Find all non-colored adjacent vertices
       int v;
       for (v=0; v < MAX_BOARD; ++v)
@@ -125,7 +123,7 @@ int isBipartite(int G[MAX_BOARD][MAX_BOARD], int VVertices)
             colorArr[v] = 1 - colorArr[u];
             enqueue(Q, v, &qStart, &qEnd);
          }
- 
+
          // An edge from u to v exists and destination
          // v is colored with same color as u
          else if (G[u][v] && colorArr[v] == colorArr[u])
